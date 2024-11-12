@@ -1,0 +1,8 @@
+[package]
+name = "manifest_example"
+version = "0.0.0"
+edition = "2021"
+
+[dependencies]
+uaup-rs = {path = "../../uaup-core-lib"}
+serde = { version = "1.0.215", features = ["derive"] }
