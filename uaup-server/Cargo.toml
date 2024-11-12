@@ -22,6 +22,9 @@ walkdir = "2.5.0"
 awc = "3.1.0"
 log = "0.4.22"
 
+# Local dependencies
+uaup-rs = { path = "../uaup-core-lib", features = ["manifest", "generate_manifest"] }
+
 
 [build-dependencies]
 cargo-watch = "8.5.2"
