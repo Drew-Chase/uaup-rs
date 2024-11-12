@@ -13,6 +13,9 @@ serde_json = { version = "1.0.132", optional = true }
 serde = { version = "1.0.215", features = ["derive"], optional = true }
 futures-util = "0.3.31"
 env_logger = "0.11.5"
+sha2 = { version = "0.11.0-pre.4", optional = true }
+base16ct = { version = "0.2.0", optional = true, features = ["alloc"] }
+chrono = {version = "0.4.38", optional = true, features = ["alloc", "serde", "clock", "now"]}
 
 
 
@@ -21,5 +24,5 @@ github = []
 
 # Custom Manifest Files
 manifest = []
-generate_manifest = ["manifest", "dep:serde_json", "dep:serde"]
+create = ["manifest", "dep:serde_json", "dep:serde", "dep:sha2", "dep:base16ct", "dep:chrono"]
 update_server = ["manifest", "dep:actix", "dep:actix-web", "dep:serde_json", "dep:serde"]
