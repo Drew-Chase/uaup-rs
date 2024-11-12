@@ -2,5 +2,5 @@
 mod github;
 #[cfg(feature = "manifest")]
 mod manifest;
-#[cfg(feature = "manifest_server")]
-mod manifest_server;
+#[cfg(feature = "update_server")]
+mod update_server;
