@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="EMPTY_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/uaup-cli/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/uaup-core-lib/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/uaup-server/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+      <excludeFolder url="file://$MODULE_DIR$/uaup-cli/target" />
+      <excludeFolder url="file://$MODULE_DIR$/uaup-core-lib/target" />
+      <excludeFolder url="file://$MODULE_DIR$/uaup-server/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
