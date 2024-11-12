@@ -22,4 +22,4 @@ github = []
 # Custom Manifest Files
 manifest = []
 generate_manifest = ["manifest", "dep:serde_json", "dep:serde"]
-manifest_server = ["manifest", "dep:actix", "dep:actix-web", "dep:serde_json", "dep:serde"]
+update_server = ["manifest", "dep:actix", "dep:actix-web", "dep:serde_json", "dep:serde"]
