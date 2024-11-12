@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use crate::manifest_data::VersionItem;
 
 pub struct UpdateServer {
 	host: String,
@@ -7,9 +8,7 @@ pub struct UpdateServer {
 	base_path: String
 }
 
-impl<M> UpdateServer
-where
-	M: Serialize + for<'de> Deserialize<'de>
+impl UpdateServer
 {
 	pub fn new(host: String, port: u16, secure: bool, base_path: Option<String>) -> Self {
 		UpdateServer {
@@ -19,7 +18,7 @@ where
 			secure
 		}
 	}
-	pub async fn get_updates(&self) -> Result<Vec<M>, String> {
+	pub async fn get_updates(&self) -> Result<Vec<VersionItem>, String> {
 		reqwest::get(
 			&format!(
 				"{protocol}://{host}:{port}/{base_path}/updates",
@@ -31,7 +30,7 @@ where
 		)
 			.await
 			.map_err(|e| e.to_string())?
-			.json::<Vec<M>>()
+			.json::<Vec<VersionItem>>()
 			.await
 			.map_err(|e| e.to_string())
 	}
