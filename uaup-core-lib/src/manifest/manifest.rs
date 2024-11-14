@@ -5,7 +5,7 @@ use std::fs;
 use std::path::{Path, PathBuf};
 
 #[cfg(feature = "create")]
-pub fn generate_manifest(version: impl AsRef<str>, platforms: Vec<Platform>, release_notes: impl AsRef<str>) -> Result<VersionItem, Box<dyn Error>> {
+pub fn create(version: impl AsRef<str>, platforms: Vec<Platform>, release_notes: impl AsRef<str>) -> Result<VersionItem, Box<dyn Error>> {
 	let mut platform_items: Vec<PlatformItem> = vec![];
 	for platform in platforms {
 		let platform_item = generate_platform_item(platform.os, platform.architecture, platform.files)?;
