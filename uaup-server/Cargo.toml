@@ -23,7 +23,7 @@ awc = "3.1.0"
 log = "0.4.22"
 
 # Local dependencies
-uaup-rs = { path = "../uaup-core-lib", features = ["manifest", "generate_manifest"] }
+uaup-rs = { path = "../uaup-core-lib", features = ["manifest", "create"] }
 
 
 [build-dependencies]
