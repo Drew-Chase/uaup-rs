@@ -1,0 +1,29 @@
+[project]
+name = "" # Optional: This is only needed if the platform type is "other"
+version = "" # Optional: This is only needed if the platform type is "other"
+upload_server = "https://127.0.0.1:8080" # Optional: This is only required if you want to automatically upload to a UAUP server
+archive_name = "" # Optional: The default archive name is "{{os}}-{{architecture}}-{{version}}.tar.xz"
+
+[platform.windows.x86_64]
+# Command to build the application for 64-bit Windows
+build_command = ""
+# Directory where the build output will be stored
+output_dir = ""
+# If true, the ignore file will be used to determine which files to ignore
+use_ignore_file = true
+# Name of the executable to launch; specify if launching a compiled binary
+launch_executable = ""
+# Command to launch the application; specify if launching in an unusual way (e.g., "python3 main.py")
+launch_command = ""
+
+#[platform.windows.x86]
+#[platform.windows.arm64]
+#[platform.windows.arm]
+#[platform.linux.x86_64]
+#[platform.linux.x86]
+#[platform.linux.arm64]
+#[platform.linux.arm]
+#[platform.macos.x86_64]
+#[platform.macos.x86]
+#[platform.macos.arm64]
+#[platform.macos.arm]
