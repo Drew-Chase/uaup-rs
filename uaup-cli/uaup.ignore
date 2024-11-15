@@ -1,0 +1,5 @@
+# This will ignore everything except .exe files
+!*.exe
+target
+dist
+target/**/*.exe
