@@ -4,4 +4,6 @@ version = "0.0.0"
 edition = "2021"
 
 [dependencies]
-uaup-rs = { path = "../uaup-core-lib" }
+uaup-rs = { path = "../uaup-core-lib", features = ["manifest", "create", "github"] }
+clap = { version = "4.5.21", features = ["color", "error-context", "suggestions", "wrap_help", "help", "derive", "usage", "unicode", "string"] }
+env_logger = "0.11.5"
