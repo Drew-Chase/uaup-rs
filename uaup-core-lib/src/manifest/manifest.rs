@@ -1,4 +1,6 @@
 use crate::manifest_data::{Architecture, FileHash, Platform, PlatformItem, VersionItem, OS};
+use log::debug;
+use lzma_tarball::writer::{ArchiveEntry, LZMATarballWriter};
 use sha2::Digest;
 use std::error::Error;
 use std::fs;
@@ -12,6 +14,10 @@ pub fn create(version: impl AsRef<str>, platforms: Vec<Platform>, release_notes:
 		platform_items.push(platform_item);
 	}
 
+	for platform in &platform_items {
+		generate_update_archive(platform, version.as_ref())?;
+	}
+
 	Ok(VersionItem {
 		version: version.as_ref().to_string(),
 		platforms: platform_items,
@@ -21,9 +27,39 @@ pub fn create(version: impl AsRef<str>, platforms: Vec<Platform>, release_notes:
 }
 
 
-fn generate_update_archive(files: Vec<String>, platform_item: PlatformItem) -> Result<PathBuf, Box<dyn Error>>
+fn generate_update_archive(platform_item: impl AsRef<PlatformItem>, version: impl AsRef<str>) -> Result<PathBuf, Box<dyn Error>>
 {
-	Ok(PathBuf::new())
+	let platform_item = platform_item.as_ref();
+	let files: Vec<String> = platform_item.sha256.iter().map(|f| f.file.clone()).collect();
+	let root = calculate_root(&files);
+	let mut files: Vec<ArchiveEntry> = files.iter().map(|f|
+		ArchiveEntry {
+			archive_path: f.strip_prefix(&root).unwrap_or(f).to_string(),
+			filesystem_path: PathBuf::from(f)
+		}
+	).collect();
+
+	let output_file = PathBuf::from(format!("{}-{}-{}.tar.xz", platform_item.os, platform_item.architecture, version.as_ref()));
+	LZMATarballWriter::new()
+		.with_files(&mut files)
+		.set_compression_level(0)
+		.set_output(&output_file)
+		.compress(|progress| {
+			debug!("Compression: {:?}", progress);
+		})?;
+	Ok(output_file)
+}
+
+pub fn calculate_root(file_paths: &Vec<String>) -> String
+{
+	let mut root = PathBuf::from(&file_paths[0]);
+	for file in file_paths {
+		let file_path = Path::new(file);
+		while !file_path.starts_with(&root) {
+			root.pop();
+		}
+	}
+	root.to_string_lossy().into_owned()
 }
 
 fn generate_platform_item(os: OS, architecture: Architecture, files: Vec<String>) -> Result<PlatformItem, Box<dyn Error>>
