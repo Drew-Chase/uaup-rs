@@ -1,13 +1,13 @@
 #[cfg(feature = "github")]
 #[path = "github/github.rs"]
-mod github;
+pub mod github;
 #[cfg(feature = "manifest")]
 #[path = "manifest/manifest.rs"]
-mod manifest;
+pub mod manifest;
 
 #[cfg(feature = "manifest")]
 #[path = "manifest/manifest_data.rs"]
-mod manifest_data;
+pub mod manifest_data;
 #[cfg(feature = "update_server")]
 #[path = "manifest/update_server.rs"]
-mod update_server;
+pub mod update_server;
