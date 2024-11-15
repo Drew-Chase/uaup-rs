@@ -1,9 +1,10 @@
+use clap::ColorChoice;
 use clap::{Parser, ValueEnum};
 use std::fmt::Display;
 use std::str::FromStr;
 
 #[derive(Parser)]
-#[command(name = "uaup-cli", version, author)]
+#[command(name = "uaup-cli", version, author, color = ColorChoice::Auto)]
 pub struct UaupCliArgs {
 	#[clap(subcommand)]
 	pub subcmd: SubCommand,
@@ -18,7 +19,8 @@ pub enum SubCommand {
 	Uninstall(UninstallArgs),
 	#[command(name = "update")]
 	Update(UpdateArgs),
-	#[command(name = "create")]
+	#[command(name = "create", color = ColorChoice::Auto)]
+	/// Provides options to create an update
 	Create(CreateArgs),
 }
 
@@ -56,10 +58,11 @@ pub struct CreateArgs {
 		default_value = "other",
 		value_enum
 	)]
-	/// The type of project you are creating the update for, this will allow the fetching of information from project files
+	/// The type of project you are creating the update for,
+	/// this will allow the fetching of information from project files
 	/// Ex: NodeJS will fetch the version from the package.json file
 	pub project_type: ProjectType,
-	
+
 	#[arg(long)]
 	/// This will not push the archives to the server and will not increment the version number in the config file
 	pub dry_run: bool,
